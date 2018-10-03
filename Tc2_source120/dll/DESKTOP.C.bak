@@ -1,0 +1,498 @@
+/*-------------------------------------------
+  desktop.c
+    Customize Desktop Icon View
+    Two_toNe 2002
+---------------------------------------------*/
+#include "tcdll.h"
+
+#ifndef LVS_SMALLICON
+#define LVS_SMALLICON           0x0002
+#endif
+
+#ifndef LVS_ICON
+#define LVS_ICON           0x0000
+#endif
+
+HWND hwndDesktop = NULL;
+static LONG oldstyle;
+
+//LRESULT CALLBACK WndProcDesktop(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK WndProcDesktop(HWND hwnd, UINT message,
+	WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcDesktopParent(HWND hwnd, UINT message,
+	WPARAM wParam, LPARAM lParam);
+
+static WNDPROC oldWndProcDesktop = NULL;
+static WNDPROC oldWndProcDesktopParent = NULL;
+
+BOOL bSmallIcons = FALSE;
+BOOL bLargeIcons = FALSE;
+BOOL bExLargeIcons = FALSE;
+BOOL bTransBK = FALSE;
+BOOL bCustTextColor = FALSE;
+COLORREF DeskTextColor, oldDeskTextColor;
+void SetDesktopIconTextBk(BOOL bNoTrans);
+void SetDesktopIconTextColor(BOOL bDefault);
+void ClearDesktopIconText(void);
+
+
+HIMAGELIST hilNewList = NULL;
+void CreateNewImageList(int lSize);
+void ResetOldImageList(void);
+
+extern BOOL bWin2000;
+
+char DesktopIconSize[1024];
+static LONG DesktopIconStyle;
+
+char AltRClickApp[1024];
+BOOL bAltRClickApp = FALSE;
+BOOL bAltRClickThroughIcons = FALSE;
+BOOL DesktopIconNoText = FALSE;
+
+BOOL bCallDefaultRClick = FALSE;
+BOOL bIgnoreRClick = FALSE;
+
+int ScreenWidth = 800, ScreenHeight = 600;
+BOOL bSetDesktopArea = FALSE;
+int sdaLeft = 0, sdaRight = 0, sdaBottom = 0, sdaTop = 0;
+RECT origWorkArea;
+
+char caption[80];
+
+/*--------------------------------------------------
+   initialize
+----------------------------------------------------*/
+void SetDesktop(void)
+{
+	
+	SHFILEINFO shfi;
+	HIMAGELIST hilBigIcons;
+	LVITEM lvItem;
+	BOOL b;
+	HWND hwnd;
+	char caption[80];
+	RECT r;
+
+	EndDesktop();
+
+	b = GetMyRegLong("Desktop", "CustomizeDesktop", FALSE);
+	if(!b) return;
+
+	if(b)
+	{
+		hwnd = FindWindow("Progman", "Program Manager");
+		if(!hwnd) return;
+		hwnd = GetWindow(hwnd, GW_CHILD);
+		hwnd = GetWindow(hwnd, GW_CHILD);
+		while(hwnd)
+		{
+			char s[80];
+			GetClassName(hwnd, s, 80);
+			if(lstrcmpi(s, "SysListView32") == 0) break;
+			hwnd = GetWindow(hwnd, GW_HWNDNEXT);
+		}
+		if(!hwnd) return;
+	}
+
+	//if (GetWindowLong(hwndDesktop, GWL_STYLE) != oldstyle) return;
+
+	//EndDesktopIcons();
+
+	hwndDesktop = hwnd;
+	//oldstyle = GetWindowLong(hwndDesktop, GWL_STYLE);
+	//PostMessage(hwndDesktop, WM_COMMAND, 0x0702A, 0);
+	//SetWindowLong(hwndDesktop, GWL_STYLE, oldstyle|LVS_SMALLICON);
+
+	bTransBK = GetMyRegLong("Desktop", "DesktopTextBkTrans", FALSE);
+	if(bTransBK) SetDesktopIconTextBk(TRUE);
+	
+	bCustTextColor = GetMyRegLong("Desktop", "CustomizeDesktopTextColor", FALSE);
+	if(bCustTextColor)
+	{
+		oldDeskTextColor = ListView_GetTextColor(hwndDesktop);
+		DeskTextColor = GetMyRegLong("Desktop", "DesktopTextColor", CLR_DEFAULT);
+		SetDesktopIconTextColor(FALSE);
+	}
+
+
+	GetMyRegStr("Desktop", "DesktopIconSize", DesktopIconSize, 1024, "Normal");
+	oldstyle = GetWindowLong(hwndDesktop, GWL_STYLE);
+	if(_strnicmp(DesktopIconSize, "SMALL", 5) == 0)
+	{
+		bSmallIcons = TRUE;
+		//DesktopIconStyle = oldstyle|LVS_SMALLICON;
+		SetWindowLong(hwndDesktop, GWL_STYLE, oldstyle|LVS_SMALLICON);
+	}
+	else
+	{
+		//bLargeIcons = TRUE;
+		bSmallIcons = FALSE;	
+		//DesktopIconStyle = oldstyle|LVS_ICON;
+	}
+
+	DesktopIconNoText = GetMyRegLong("Desktop", "NoDesktopIconText", FALSE);
+	if(DesktopIconNoText)
+		ClearDesktopIconText();
+
+	//if(!bLargeIcons)
+	//{
+		//oldstyle = GetWindowLong(hwndDesktop, GWL_STYLE);
+		//SetWindowLong(hwndDesktop, GWL_STYLE, oldstyle|LVS_SMALLICON);
+	//}
+
+	//hilBigIcons = SHGetFileInfo( ".gif", 0, &shfi, sizeof( shfi), SHGFI_USEFILEATTRIBUTES | SHGFI_SYSICONINDEX | SHGFI_ICON | SHGFI_LARGEICON);
+	
+	//SendMessage(hwndDesktop, LVM_SETIMAGELIST, 0, 0x0009C438);
+	//SendMessage(hwndDesktop, LVM_SETIMAGELIST, 0, (LONG)hilBigIcons);
+
+	//CreateNewImageList(48);
+
+	/*bSetDesktopArea = GetMyRegLong("Desktop", "CustomDesktopArea", FALSE);
+	if(bSetDesktopArea)
+	{*/
+
+		/*ScreenWidth = GetSystemMetrics(SM_CXSCREEN);
+		ScreenHeight = GetSystemMetrics(SM_CYSCREEN);
+		SystemParametersInfo(SPI_GETWORKAREA,0,&origWorkArea,SPIF_SENDCHANGE);
+
+		sdaLeft = GetMyRegLong("Desktop", "DesktopAreaLeft", 0);
+		if(sdaLeft < 0 || sdaLeft > ScreenWidth) sdaLeft = 0;
+		sdaTop = GetMyRegLong("Desktop", "DesktopAreaTop", 0);
+		if(sdaTop < 0 || sdaTop > ScreenHeight) sdaTop = 0;
+		
+		sdaRight = GetMyRegLong("Desktop", "DesktopAreaRight", 0);
+		if(sdaRight == 0)
+			sdaRight = ScreenWidth;
+		else if(sdaRight < 0)
+			sdaRight = ScreenWidth - sdaRight;
+		else if(sdaRight > ScreenWidth)
+			sdaRight = ScreenWidth;
+		sdaBottom = GetMyRegLong("Desktop", "DesktopAreaBottom", 0);
+		if(sdaBottom == 0)
+			sdaBottom = ScreenHeight;
+		else if(sdaBottom < 0)
+			sdaBottom = ScreenHeight - sdaBottom;
+		else if(sdaBottom > ScreenHeight)
+			sdaBottom = ScreenHeight;*/
+
+		/*r.left = 10; //origWorkArea.left; //sdaLeft;
+		r.top = 40; //origWorkArea.top; //sdaTop;
+		r.right = 1004; //origWorkArea.right; //sdaRight;
+		r.bottom = 716; //origWorkArea.bottom; //sdaBottom;
+		SystemParametersInfo(SPI_SETWORKAREA,0,&r,SPIF_SENDCHANGE);
+		SystemParametersInfo(SPI_GETWORKAREA,0,&r,SPIF_SENDCHANGE);*/
+
+	//}
+
+	oldWndProcDesktop = (WNDPROC)GetWindowLong(hwndDesktop, GWL_WNDPROC);
+	SetWindowLongA(hwndDesktop, GWL_WNDPROC, (LONG)WndProcDesktop);
+
+	/*if(DesktopIconNoText)
+	{
+		oldWndProcDesktopParent = (WNDPROC)GetWindowLong(GetParent(hwndDesktop), GWL_WNDPROC);
+		SetWindowLongA(GetParent(hwndDesktop), GWL_WNDPROC, (LONG)WndProcDesktopParent);
+	}*/
+	//WriteDebug("SetDesktop");
+
+	bAltRClickApp = GetMyRegLong("Desktop", "AltDesktopRightClick", FALSE);
+	if(bAltRClickApp)
+	{
+		if(GetMyRegStr("Desktop", "AlternateRightClickApp", AltRClickApp, 1024, "") < 1)
+			bAltRClickApp = FALSE;
+		bAltRClickThroughIcons = GetMyRegLong("Desktop", "AltDesktopRightClickThroughIcons", FALSE);
+	}
+
+}
+
+/*--------------------------------------------------
+    reset desktop icons
+----------------------------------------------------*/
+void EndDesktop(void)
+{
+
+	if(hwndDesktop && IsWindow(hwndDesktop))
+	{
+		if(oldWndProcDesktop)
+			SetWindowLong(hwndDesktop, GWL_WNDPROC, (LONG)oldWndProcDesktop);
+		oldWndProcDesktop = NULL;
+		/*if(oldWndProcDesktopParent)
+			SetWindowLong(GetParent(hwndDesktop), GWL_WNDPROC, (LONG)oldWndProcDesktopParent);
+		oldWndProcDesktopParent = NULL;*/
+
+		if(bTransBK) SetDesktopIconTextBk(FALSE);
+		if(bCustTextColor) SetDesktopIconTextColor(TRUE);
+		if(DesktopIconNoText) SendMessage(hwndDesktop, WM_COMMAND, 28931, 0);
+		//UpdateWindow(hwndDesktop);
+		//ResetOldImageList();
+		if(bSmallIcons) 
+			SetWindowLong(hwndDesktop, GWL_STYLE, oldstyle);
+		bLargeIcons = bSmallIcons = DesktopIconNoText = FALSE;
+		//if(bSetDesktopArea)
+			//SystemParametersInfo(SPI_SETWORKAREA,0,&origWorkArea,SPIF_SENDCHANGE);
+	}
+	hwndDesktop = NULL;
+	bTransBK = bCustTextColor = FALSE;
+	bCallDefaultRClick = bAltRClickApp = FALSE;
+
+}
+
+LRESULT CALLBACK WndProcDesktop(HWND hwnd, UINT message,
+	WPARAM wParam, LPARAM lParam)
+{
+	switch(message)
+	{
+		case WM_SETREDRAW :
+			if(DesktopIconNoText)
+			{
+				LRESULT res;
+
+				res = CallWindowProc(oldWndProcDesktop, hwnd, message, wParam, lParam);
+				ClearDesktopIconText();
+				return res;
+			}
+			break;
+		/*case WM_STYLECHANGING:
+			if(bSmallIcons)
+			{
+				LPSTYLESTRUCT lpss;
+				lpss = (LPSTYLESTRUCT)lParam;
+				lpss->styleNew = oldstyle|LVS_SMALLICON; //lpss->styleOld;
+			}
+			//WriteDebug("WM_STYLECHANGED");
+			break;*/
+		case WM_STYLECHANGED:
+			if(bSmallIcons)
+			{
+				CallWindowProc(oldWndProcDesktop, hwnd, message, wParam, lParam);
+				SetWindowLong(hwndDesktop, GWL_STYLE, oldstyle|LVS_SMALLICON);
+				return 0;
+			}
+			//WriteDebug("WM_STYLECHANGED");
+			break;
+		case LVM_SETTEXTBKCOLOR:
+			if(!bTransBK) break;
+			return 0;
+		case LVM_SETTEXTCOLOR:
+			if(!bCustTextColor) break;
+			return 0;
+		//case LVM_SETIMAGELIST:
+			//WriteDebug("WM_SETTINGCHANGE");
+			//return 0;
+		case LVM_HITTEST:
+			if(bAltRClickApp && !bAltRClickThroughIcons)
+			{
+				LRESULT r;
+				LPLVHITTESTINFO lphti;
+				lphti = (LPLVHITTESTINFO)lParam;
+				r = CallWindowProc(oldWndProcDesktop, hwnd, message, wParam, lParam);
+				if((lphti->flags == LVHT_ONITEMICON || lphti->flags == LVHT_ONITEMLABEL))// && !bAltRClickThroughIcons) 
+				{
+					//CallWindowProc(oldWndProcDesktop, hwnd, message, wParam, lParam);
+					bIgnoreRClick = TRUE;
+
+					//return 0;
+					//WriteDebug("LVHT_ONITEM");
+				}
+				else
+				{
+					bIgnoreRClick = FALSE;
+					//return 0;
+				}
+				return r;
+			}
+			break;
+			//WriteDebug("WM_SETTINGCHANGE");
+			//return 0;
+		case WM_LBUTTONUP:
+			{
+				if(bIgnoreRClick)
+					bIgnoreRClick = FALSE;
+
+				break;
+			}
+		case WM_RBUTTONDOWN:
+			{
+				if(!bIgnoreRClick)
+				{
+					if(bAltRClickApp && !(wParam == MK_CONTROL))
+						return 0;
+				}
+			}
+			break;
+		case WM_RBUTTONUP:
+			{
+				if(!bIgnoreRClick)
+				{
+					if(bAltRClickApp && !(wParam == MK_CONTROL))
+					{
+						ExecFile(hwnd, AltRClickApp);
+						return 0;
+					}
+				}
+				bIgnoreRClick = FALSE;
+			}
+			break;
+	}
+	//WriteDebug("message");
+	return CallWindowProc(oldWndProcDesktop, hwnd, message, wParam, lParam);
+}
+
+LRESULT CALLBACK WndProcDesktopParent(HWND hwnd, UINT message,
+	WPARAM wParam, LPARAM lParam)
+{
+	switch(message)
+	{
+		case WM_NOTIFY:
+			{
+				LPNMHDR pnmh;
+				if(DesktopIconNoText) break;
+				pnmh = (LPNMHDR)lParam;
+				if (pnmh->code == LVN_ITEMCHANGED && pnmh->hwndFrom == hwndDesktop)
+				{
+					///LPNMLISTVIEW pnmlv;
+					///LPLVITEM plvi;
+					///pnmlv = (LPNMHDR)lParam;
+					Pause(hwnd,"1000");
+					ClearDesktopIconText();
+
+				}
+					//return 0;
+			}
+			break;
+	}
+
+	return CallWindowProc(oldWndProcDesktopParent, hwnd, message, wParam, lParam);
+}
+void SetDesktopIconTextBk(BOOL bTrans)
+{
+	COLORREF col;
+	
+	if(bTrans)
+		col = CLR_NONE;
+	else
+		col = GetSysColor(COLOR_DESKTOP);
+
+	ListView_SetTextBkColor(hwndDesktop, col);
+
+	ListView_RedrawItems(hwndDesktop, 0, ListView_GetItemCount(hwndDesktop));
+	
+	InvalidateRect(hwndDesktop, NULL, TRUE);
+}
+
+void SetDesktopIconTextColor(BOOL bDefault)
+{
+	COLORREF col;
+	
+	if(bDefault)
+	{
+		col = oldDeskTextColor  & 0x00ffffff;
+	}
+	else
+	{
+		if(DeskTextColor & 0x80000000) 
+			col = GetSysColor(DeskTextColor & 0x00ffffff);
+		else
+			col = DeskTextColor;
+	}
+
+	ListView_SetTextColor(hwndDesktop, col);
+
+	ListView_RedrawItems(hwndDesktop, 0, ListView_GetItemCount(hwndDesktop));
+	
+	InvalidateRect(hwndDesktop, NULL, TRUE);
+}
+
+void ClearDesktopIconText(void)
+{
+	LVITEM lvItem;
+	int i, ii;
+
+	GetMyRegStr("Desktop", "Blank", caption, 80, "");
+
+	ii = SendMessage(hwndDesktop, LVM_GETITEMCOUNT, 0, 0);
+
+	lvItem.state = LVIF_TEXT;
+	lvItem.stateMask = 0;
+	lvItem.cchTextMax = 0;
+	lvItem.iSubItem = 0;
+	lvItem.pszText = caption;
+
+	for(i = 0; i < ii; i++)
+	{
+		lvItem.iItem = i;
+
+		SendMessage(hwndDesktop, LVM_SETITEMTEXT, i, (LPARAM)&lvItem);
+	}
+
+}
+
+void CreateNewImageList(int lSize)
+{
+	SHFILEINFO shfi;
+	HIMAGELIST hilOldList;
+	HICON ilIcon;
+	HICON ilNewIcon;
+	LVITEMA pitem;
+	char ItemText[200];
+
+	//IMAGEINFO imi;
+	//INITCOMMONCONTROLSEX iccex;
+	int i, ii;
+	int j, jj;
+
+	//iccex.dwSize = sizeof(iccex);
+	//iccex.dwICC = ICC_LISTVIEW_CLASSES;
+	//InitCommonControlsEx(&iccex);
+
+	hilOldList = SHGetFileInfo( ".bmp", 0, &shfi, sizeof( shfi), SHGFI_USEFILEATTRIBUTES | SHGFI_SYSICONINDEX | SHGFI_ICON | SHGFI_LARGEICON);
+	hilNewList = ImageList_Create(64, 64, ILC_COLOR32, 0, ImageList_GetImageCount(hilOldList));
+
+	ii = ImageList_GetImageCount(hilOldList);
+	for(i = 0; i < ii; i++)
+	{
+		//ImageList_GetImageInfo(hilOldList, i, &imi);
+
+		//ilIcon = ImageList_GetIcon(hilOldList, i, 0x00001000);
+		ilIcon = ImageList_ExtractIcon(0, hilOldList, i);
+		//ImageList_AddIcon(hilNewList, imi.hbmImage);
+
+		ImageList_AddIcon(hilNewList, ilIcon);
+		DestroyIcon(ilIcon);
+	}
+	
+	pitem.mask = LVIF_TEXT || LVIF_IMAGE;
+	pitem.cchTextMax = 200;
+
+	jj = ListView_GetItemCount(hwndDesktop);
+	for(j = 0; j < jj; j++)
+	{
+		pitem.iItem = j;
+		ListView_GetItem(hwndDesktop, &pitem);
+		if(_strnicmp(pitem.pszText, "BOX", 3) == 0)
+		{
+			ilNewIcon = LoadIcon(0, IDI_APPLICATION);
+			ImageList_ReplaceIcon(hilNewList, pitem.iImage, ilNewIcon);
+			DestroyIcon(ilNewIcon);
+		}
+	}
+
+	ListView_SetImageList(hwndDesktop, hilNewList, LVSIL_NORMAL );
+	ListView_RedrawItems(hwndDesktop, 0, ListView_GetItemCount(hwndDesktop));
+	InvalidateRect(hwndDesktop, NULL, TRUE);
+
+}
+
+void ResetOldImageList(void)
+{
+	SHFILEINFO shfi;
+	HIMAGELIST hilOldList;
+
+	hilOldList = SHGetFileInfo( ".bmp", 0, &shfi, sizeof( shfi), SHGFI_USEFILEATTRIBUTES | SHGFI_SYSICONINDEX | SHGFI_LARGEICON);
+
+	ListView_SetImageList(hwndDesktop, hilOldList, LVSIL_NORMAL );
+	ListView_RedrawItems(hwndDesktop, 0, ListView_GetItemCount(hwndDesktop));
+	InvalidateRect(hwndDesktop, NULL, TRUE);
+	ImageList_Destroy(hilNewList);
+
+}

@@ -1,0 +1,884 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resrc1.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "TClock"
+    BEGIN
+        MENUITEM "&Adjust Date/Time",           IDC_DATETIME
+        MENUITEM "&Cascade",                    IDC_CASCADE
+        MENUITEM "Tile &Horizontally",          IDC_TILEHORZ
+        MENUITEM "Tile &Vertically",            IDC_TILEVERT
+        MENUITEM SEPARATOR
+        MENUITEM "&Minimize All Windows",       IDC_MINALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Task Manager...",            IDC_TASKMAN
+        MENUITEM SEPARATOR
+        MENUITEM "Taskbar P&roperties",         IDC_TASKBARPROP
+        MENUITEM SEPARATOR
+        MENUITEM "Timer",                       IDC_TIMER
+        MENUITEM "Synchronize",                 IDC_SYNCTIME
+        MENUITEM SEPARATOR
+        MENUITEM "Tclock2 Properties",          IDC_SHOWPROP
+        MENUITEM "Refresh Tclock2",             IDC_REFRESHTCLOCK
+        MENUITEM "Tclock2 Calendar",            IDC_SHOWCALENDER
+        MENUITEM SEPARATOR
+        MENUITEM "Tclock2 Help",                IDC_SHOWHELP, GRAYED
+        MENUITEM "Exit Tclock2",                IDC_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+CHOOSECOLOR DIALOGEX 2, 0, 439, 183
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Color"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "&Basic colors:",-1,4,4,140,9
+    CONTROL         "",COLOR_BOX1,"Static",SS_SIMPLE | WS_GROUP | WS_TABSTOP,
+                    4,14,140,86
+    LTEXT           "&Custom colors:",-1,4,106,140,9
+    CONTROL         "",COLOR_CUSTOM1,"Static",SS_SIMPLE | WS_GROUP | 
+                    WS_TABSTOP,4,116,140,28
+    PUSHBUTTON      "&Define Custom Colors >>",COLOR_MIX,4,150,140,14,
+                    WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,4,166,44,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,52,166,44,14,WS_GROUP
+    PUSHBUTTON      "&Help",1038,100,166,44,14,WS_GROUP
+    CONTROL         "",COLOR_RAINBOW,"Static",SS_SIMPLE | SS_SUNKEN,152,4,
+                    118,116
+    CONTROL         "",COLOR_LUMSCROLL,"Static",SS_SIMPLE | SS_SUNKEN,280,4,
+                    8,116
+    CONTROL         "",COLOR_CURRENT,"Static",SS_SIMPLE | SS_SUNKEN,152,124,
+                    40,26
+    PUSHBUTTON      "&o",COLOR_SOLID,300,200,6,14,WS_GROUP
+    RTEXT           "Color",COLOR_SOLID_LEFT,152,151,20,9
+    LTEXT           "|S&olid",COLOR_SOLID_RIGHT,172,151,20,9
+    RTEXT           "Hu&e:",COLOR_HUEACCEL,194,126,20,9
+    EDITTEXT        COLOR_HUE,216,124,18,12,WS_GROUP
+    RTEXT           "&Sat:",COLOR_SATACCEL,194,140,20,9
+    EDITTEXT        COLOR_SAT,216,138,18,12,WS_GROUP
+    RTEXT           "&Lum:",COLOR_LUMACCEL,194,154,20,9
+    EDITTEXT        COLOR_LUM,216,152,18,12,WS_GROUP
+    RTEXT           "&Red:",COLOR_REDACCEL,243,126,24,9
+    EDITTEXT        COLOR_RED,269,124,18,12,WS_GROUP
+    RTEXT           "&Green:",COLOR_GREENACCEL,243,140,24,9
+    EDITTEXT        COLOR_GREEN,269,138,18,12,WS_GROUP
+    RTEXT           "Bl&ue:",COLOR_BLUEACCEL,243,154,24,9
+    EDITTEXT        COLOR_BLUE,269,152,18,12,WS_GROUP
+    PUSHBUTTON      "&Add to Custom Colors",COLOR_ADD,152,166,142,14,
+                    WS_GROUP
+    CONTROL         "List1",COLOR_SYSTEM_LIST,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_OWNERDRAWFIXED | LVS_NOCOLUMNHEADER | 
+                    LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,299,4,135,175,
+                    WS_EX_STATICEDGE
+END
+
+IDD_PAGECOLOR DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Clock Text"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Text",IDC_STATIC,24,11,29,11
+    COMBOBOX        IDC_COLFORE,56,9,76,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_CHOOSECOLFORE,137,9,12,13
+    RTEXT           "Font",IDC_STATIC,28,33,26,11
+    COMBOBOX        IDC_FONT,56,31,76,120,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Size",IDC_STATIC,20,53,34,11
+    COMBOBOX        IDC_FONTSIZE,56,51,38,66,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Bold",IDC_BOLD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    106,53,33,12
+    CONTROL         "Italic",IDC_ITALIC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,146,53,33,12
+    RTEXT           "Clock Height",IDC_STATIC,19,99,42,12
+    EDITTEXT        IDC_CLOCKHEIGHT,65,97,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINCHEIGHT,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,86,151,9,13
+    RTEXT           "Clock Width",IDC_STATIC,17,120,42,12
+    EDITTEXT        IDC_CLOCKWIDTH,65,118,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINCWIDTH,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,86,176,9,13
+    RTEXT           "Text Vertical Position",IDC_STATIC,94,99,68,12
+    EDITTEXT        IDC_VERTPOS,173,97,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINVPOS,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,164,150,9,13
+    RTEXT           "Line Height",IDC_STATIC,21,140,36,12
+    EDITTEXT        IDC_LINEHEIGHT,65,137,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINLHEIGHT,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,164,176,9,13
+    RTEXT           "Text Horizontal Position",IDC_HPOS,94,120,75,12
+    EDITTEXT        IDC_HORIZPOS,173,118,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINHPOS,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,241,166,9,13
+    RTEXT           "Rotate",IDC_LABCLOCKROTATE,28,74,26,11
+    COMBOBOX        IDC_CLOCKROTATE,56,72,76,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PAGECLOCK DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Tray / Clock Fill"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Color 1",IDC_LABCOLBACK,16,158,29,11
+    COMBOBOX        IDC_COLBACK,48,156,76,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_CHOOSECOLBACK,129,156,12,13
+    CONTROL         "Color 2",IDC_CHKCOLOR2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,157,157,37,11
+    COMBOBOX        IDC_COLBACK2,195,156,76,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_CHOOSECOLBACK2,276,156,12,13
+    COMBOBOX        IDC_FILLSTYLEMENU,117,3,75,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Fill Settings",ICD_FRAMECOLOR,5,139,301,42
+    GROUPBOX        "Skin Settings",IDC_FRAMESKIN,5,25,301,111
+    LTEXT           "Fill Style",IDC_STATIC,85,5,25,10
+    LTEXT           "Skin File",IDC_LABSKINFILE,22,43,30,10
+    EDITTEXT        IDC_FILECLOCKSKIN,55,40,211,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SANSHOCLOCKSKIN,273,40,15,15
+    LTEXT           "Left Edge",IDC_LABSKINEDGELEFT,22,84,35,10
+    EDITTEXT        IDC_CLOCKSKINEDGELEFT,60,81,30,15,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPINSKINEDGELEFT,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,92,76,10,15
+    LTEXT           "Top Edge",IDC_LABSKINEDGETOP,22,109,35,10
+    EDITTEXT        IDC_CLOCKSKINEDGETOP,60,106,30,15,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_SPINSKINEDGETOP,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,92,101,10,15
+    LTEXT           "Right Edge",IDC_LABSKINEDGERIGHT,136,84,35,10
+    EDITTEXT        IDC_CLOCKSKINEDGERIGHT,184,81,30,15,ES_AUTOHSCROLL
+    CONTROL         "Spin3",IDC_SPINSKINEDGERIGHT,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,219,81,10,15
+    LTEXT           "Bottom Edge",IDC_LABSKINEDGEBOTTOM,136,109,45,10
+    EDITTEXT        IDC_CLOCKSKINEDGEBOTTOM,184,106,30,15,ES_AUTOHSCROLL
+    CONTROL         "Spin4",IDC_SPINSKINEDGEBOTTOM,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,219,106,10,15
+    CONTROL         "Use Transparency",IDC_CLOCKSKINTRANS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,22,63,75,11
+END
+
+IDD_PAGEFORMAT DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Format"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Locale",IDC_STATIC,7,11,25,11
+    COMBOBOX        IDC_LOCALE,40,10,86,125,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Year",IDC_YEAR4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,32,32,12
+    CONTROL         "Year (2 digits)",IDC_YEAR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,51,32,59,12
+    CONTROL         "Month",IDC_MONTHS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,67,35,13
+    CONTROL         "Month (digit)",IDC_MONTH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,51,67,54,12
+    CONTROL         "Date",IDC_DAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    50,30,12
+    CONTROL         "Day",IDC_WEEKDAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    50,50,34,12
+    CONTROL         "CR",IDC_KAIGYO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    145,86,30,11
+    CONTROL         "Hour",IDC_HOUR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    86,30,12
+    CONTROL         "Minute",IDC_MINUTE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,51,86,34,12
+    CONTROL         "Second",IDC_SECOND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,97,86,38,12
+    CONTROL         "Internet Time",IDC_INTERNETTIME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,104,72,12
+    CONTROL         "12H",IDC_12HOUR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,122,48,13
+    CONTROL         "AM/PM",IDC_AMPM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    63,122,41,12
+    CONTROL         "Custom Format",IDC_CUSTOM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,155,136,12
+    EDITTEXT        IDC_FORMAT,10,170,185,18,ES_AUTOHSCROLL
+    RTEXT           "AM Symbol",IDC_LABAMSYMBOL,11,143,38,8
+    COMBOBOX        IDC_AMSYMBOL,55,140,35,50,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    RTEXT           "PM Symbol",IDC_LABPMSYMBOL,100,143,38,8
+    COMBOBOX        IDC_PMSYMBOL,145,140,35,50,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Show 0:xx at 12:xx",IDC_ZERO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,122,80,13
+END
+
+IDD_FORMAT2 DIALOGEX 0, 0, 160, 100
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Calendar"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "MonthCalendar1",IDC_MONTHCALENDAR1,"SysMonthCal32",
+                    WS_TABSTOP | 0x8,0,0,160,100,WS_EX_CLIENTEDGE
+END
+
+IDD_PAGEALARM DIALOG DISCARDABLE  0, 0, 310, 199
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Alarm"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Alarm Name",IDC_STATIC,17,13,40,11
+    COMBOBOX        IDC_COMBOALARM,62,10,77,78,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "",IDC_DELALARM,147,10,13,14,BS_ICON
+    CONTROL         "Enable",IDC_ALARM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    45,28,42,11
+    RTEXT           "Time",IDC_LABTIMEALARM,17,46,24,12
+    EDITTEXT        IDC_HOURALARM,45,44,22,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINHOUR,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,176,12,9,12
+    CTEXT           ":",IDC_LABCOLON,68,46,8,10
+    EDITTEXT        IDC_MINUTEALARM,77,44,22,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINMINUTE,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,189,11,9,12
+    PUSHBUTTON      "Days...",IDC_ALARMDAY,116,42,33,15
+    RTEXT           "File",IDC_LABSOUNDALARM,13,65,28,11
+    EDITTEXT        IDC_FILEALARM,45,63,105,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SANSHOALARM,153,63,12,12
+    RTEXT           "Test",IDC_LABTESTALARM,17,85,23,11
+    PUSHBUTTON      "",IDC_TESTALARM,45,82,12,13,BS_ICON
+    CONTROL         "12H",IDC_12HOURALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,45,101,42,11
+    CONTROL         "Repeat",IDC_REPEATALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,92,101,40,11
+    CONTROL         "Blink",IDC_BLINKALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,136,101,43,11
+    LTEXT           "",IDC_HIDDENALARMDAY,13,65,28,11,NOT WS_VISIBLE
+    CONTROL         "Play Sound Every Hour",IDC_JIHOU,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,122,89,11
+    RTEXT           "File",IDC_LABSOUNDJIHOU,13,140,28,11
+    EDITTEXT        IDC_FILEJIHOU,45,138,105,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SANSHOJIHOU,153,138,12,12
+    RTEXT           "Test",IDC_LABTESTJIHOU,17,161,23,11
+    PUSHBUTTON      "",IDC_TESTJIHOU,45,157,13,14,BS_ICON
+    CONTROL         "Repeat",IDC_REPEATJIHOU,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,45,177,40,11
+    CONTROL         "Blink",IDC_BLINKJIHOU,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,92,177,44,11
+END
+
+IDD_ALARMDAY DIALOG DISCARDABLE  0, 0, 187, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Days To Alarm"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Every Day",IDC_ALARMDAY0,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,7,51,11
+    CONTROL         "",IDC_ALARMDAY1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    11,27,51,11
+    CONTROL         "",IDC_ALARMDAY2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    72,27,51,11
+    CONTROL         "",IDC_ALARMDAY3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    133,27,51,11
+    CONTROL         "",IDC_ALARMDAY4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    11,49,51,11
+    CONTROL         "",IDC_ALARMDAY5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    72,49,51,11
+    CONTROL         "",IDC_ALARMDAY6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    133,49,51,11
+    CONTROL         "",IDC_ALARMDAY7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    11,71,51,11
+    DEFPUSHBUTTON   "OK",IDOK,38,92,50,15
+    PUSHBUTTON      "Cancel",IDCANCEL,99,92,50,15
+END
+
+IDD_PAGEMOUSE DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Mouse"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Drop Files",IDC_STATIC,10,7,48,10
+    COMBOBOX        IDC_DROPFILES,40,21,100,80,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    RTEXT           "Application",IDC_LABDROPFILESAPP,5,43,35,11
+    EDITTEXT        IDC_DROPFILESAPP,45,40,111,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_DROPFILESAPPSANSHO,160,40,12,13
+    LTEXT           "Mouse Click",IDC_LABMOUSEBUTTON,10,71,49,10
+    COMBOBOX        IDC_MOUSEBUTTON,63,69,57,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Single",IDC_RADSINGLE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,7,88,45,11
+    CONTROL         "Double",IDC_RADDOUBLE,"Button",BS_AUTORADIOBUTTON,61,88,
+                    41,11
+    CONTROL         "Triple",IDC_RADTRIPLE,"Button",BS_AUTORADIOBUTTON,109,
+                    88,42,11
+    CONTROL         "Quadruple",IDC_RADQUADRUPLE,"Button",BS_AUTORADIOBUTTON,
+                    158,88,45,10
+    COMBOBOX        IDC_MOUSEFUNC,40,105,104,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    RTEXT           "File",IDC_LABMOUSEFILE,8,127,27,11
+    EDITTEXT        IDC_MOUSEFILE,40,125,111,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_MOUSEFILESANSHO,155,124,12,13
+    RTEXT           "Tooltip",IDC_STATIC,1,161,39,8
+    EDITTEXT        IDC_TOOLTIP,44,158,146,14,ES_AUTOHSCROLL
+END
+
+IDD_PAGESKIN DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Start Button"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Hide Start Button",IDC_STARTBTNHIDE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,2,70,10
+    CONTROL         "Start Menu From Clock",IDC_STARTMENUCLOCK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,95,2,85,10
+    CONTROL         "Customize Start Button",IDC_STARTBTN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,14,85,10
+    LTEXT           "Icon",IDC_LABFILESTART,22,29,20,10
+    EDITTEXT        IDC_FILESTART,52,26,125,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SANSHOSTART,182,26,15,15
+    LTEXT           "Caption",IDC_LABCAPSTART,22,48,25,10
+    EDITTEXT        IDC_CAPTIONSTART,57,45,120,15,ES_AUTOHSCROLL
+    LTEXT           "Start Button Style",IDC_LABSTARTBTNSTYLE,22,67,55,10
+    COMBOBOX        IDC_STARTBTNSTYLE,87,64,90,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Custom Color",IDC_FRAMECUSTCOLOR,11,125,290,66
+    RTEXT           "HiLight",IDC_LABSTARTHILIGHT,31,138,25,10
+    COMBOBOX        IDC_MENUSTARTHILIGHT,61,136,69,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANCHOSTARTHILIGHT,134,136,15,13
+    RTEXT           "Light",IDC_LABSTARTLIGHT,174,139,25,10
+    COMBOBOX        IDC_MENUSTARTLIGHT,206,137,69,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANCHOSTARTLIGHT,279,137,15,12
+    RTEXT           "3DShadow",IDC_LABSTART3DSHADOW,18,155,37,10
+    COMBOBOX        IDC_MENUSTART3DSHADOW,61,153,69,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANCHOSTART3DSHADOW,134,153,15,12
+    RTEXT           "3DDKShadow",IDC_LABSTART3DDKSHADOW,155,155,45,10
+    COMBOBOX        IDC_MENUSTART3DDKSHADOW,206,154,69,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANCHOSTART3DDKSHADOW,279,154,15,13
+    RTEXT           "3DFace",IDC_LABSTARTFACE,24,173,30,10
+    COMBOBOX        IDC_MENUSTARTFACE,61,171,69,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANCHOSTARTFACE,134,171,15,12
+    RTEXT           "Text",IDC_LABSTARTCOLFORE,4,85,29,11
+    COMBOBOX        IDC_STARTCOLFORE,39,83,76,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_STARTCHOOSECOLFORE,117,83,12,13
+    RTEXT           "Font",IDC_LABSTARTFONT,8,107,26,11
+    COMBOBOX        IDC_STARTFONT,39,105,76,120,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Size",IDC_LABSTARTFONTSIZE,140,85,22,11
+    COMBOBOX        IDC_STARTFONTSIZE,167,83,38,66,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Bold",IDC_STARTBOLD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,148,106,33,12
+    CONTROL         "Italic",IDC_STARTITALIC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,188,106,33,12
+    CONTROL         "Use Large Icon",IDC_STARTICONLARGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,28,64,10
+    CONTROL         "Use Transparency",IDC_STARTBUTTONTRANS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,47,77,10
+END
+
+IDD_PAGETASKBAR DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Taskbar"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Flat Task Switch",IDC_TASKSWITCHFLAT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,26,66,80,12
+    CONTROL         "Flat Tray",IDC_FLATTRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,115,80,12
+    RTEXT           "Transparency Of Taskbar",IDC_CAPBARTRANS,23,48,82,12
+    EDITTEXT        IDC_BARTRANS,113,45,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINBARTRANS,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,152,45,7,13
+    CONTROL         "Rebar Gripper Style",IDC_LABGRIPPERSTYLE,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,25,10,65,10
+    COMBOBOX        IDC_GRIPPERSTYLE,94,9,90,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show Separators",IDC_TASKSWITCHSEP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,41,83,69,10
+    LTEXT           "Taskbar Edge Style",IDC_LABTASKBAREDGESTYLE,24,28,65,10
+    COMBOBOX        IDC_TASKBAREDGESTYLE,94,27,90,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Task Switch Icons Only",IDC_TASKSWITCHICONS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,26,99,90,10
+    CONTROL         "Clear Taskbar",IDC_BARCLEAR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,134,59,10
+    CONTROL         "(Warning: Advanced Feature, Use With Caution)",
+                    IDC_LABBARCLEAR,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,89,
+                    135,153,9
+END
+
+IDD_PAGEDESKTOP DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Desktop"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Transparent Desktop Icon Text Background",
+                    IDC_TRANSDESKTOPICONBK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,36,22,152,11
+    LTEXT           "Desktop Icon Size",IDC_LABDESKTOPICONSIZE,35,39,65,10
+    COMBOBOX        IDC_DESKTOPICONSIZE,105,37,90,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Customize Desktop",IDC_CUSTOMIZEDESKTOP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,21,7,81,10
+    COMBOBOX        IDC_DESKTOPICONTEXT,114,54,76,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_SANSHODESKTOPICONTEXT,192,54,12,13
+    EDITTEXT        IDC_DESKTOPALTRCLICKAPP,133,72,145,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_DESKTOPALTRCLICKAPPBROWSE,281,73,12,13
+    CONTROL         "Custom Text Color",IDC_LABDESKTOPICONTEXT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,36,56,72,10
+    CONTROL         "Alternate Right Click App",IDC_LABDESKTOPALTRCLICKAPP,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,36,74,93,10
+    CONTROL         "Allow Alternate Right Click App Through Icons",
+                    IDC_DESKTOPALTRCLICKTHROUGHICONS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,36,91,161,10
+    CONTROL         "No Desktop Icon Text",IDC_DESKTOPNOICONTEXT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,36,107,152,11
+END
+
+IDD_PAGESNTP DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Synchronize"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Server",IDC_STATIC,7,12,31,12
+    COMBOBOX        IDC_NTPSERVER,42,9,91,76,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "",IDC_DELSERVER,137,9,13,14,BS_ICON
+    PUSHBUTTON      "",IDC_SYNCNOW,166,7,17,17,BS_ICON
+    CONTROL         "Adjust Regularly",IDC_SYNCTIMER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,87,13
+    CONTROL         "Once A Day",IDC_SYNCADAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,49,54,12
+    RTEXT           "",IDC_LABSYNCMIN1,128,61,28,12,NOT WS_VISIBLE
+    EDITTEXT        IDC_SYNCMIN,84,48,28,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SYNCMINSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,150,47,9,14
+    LTEXT           "Minutes",IDC_LABSYNCMIN2,115,50,30,12
+    CONTROL         "While Dial-Upping Only",IDC_SYNCNODIAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,26,68,101,12
+    RTEXT           "Timeout",IDC_STATIC,2,89,37,12
+    EDITTEXT        IDC_TIMEOUT,42,86,36,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_TIMEOUTSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,102,83,9,14
+    LTEXT           "msecs",IDC_STATIC,81,89,24,10
+    CONTROL         "Save Log",IDC_SNTPLOG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,123,88,58,12
+    RTEXT           "Sound",IDC_STATIC,10,113,28,12
+    EDITTEXT        IDC_SYNCSOUND,42,110,104,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SYNCSOUNDBROWSE,152,110,12,13
+    LTEXT           "Activity Logging",IDC_STATIC,11,133,54,10
+    LTEXT           "",IDC_SNTPLISTHERE,10,144,153,40,NOT WS_VISIBLE | 
+                    WS_BORDER
+END
+
+IDD_PAGEMISC DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Misc"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Do Not Customize Clock",IDC_NOCLOCK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,12,93,11
+    CONTROL         "Play WAVE By Using MCI",IDC_MCIWAVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,108,12,97,11
+    LTEXT           "Start To Customize After",IDC_STATIC,13,33,77,11
+    EDITTEXT        IDC_DELAYSTART,95,30,24,13,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPINDELAYSTART,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,163,44,9,12
+    LTEXT           "Seconds",IDC_STATIC,124,32,48,8
+    CONTROL         "Start Tclock2 When Windows Starts",IDC_STARTUP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,176,136,11
+    CONTROL         "Compact Tclock2 Menu (Requires Tclock2 To Be Restarted)",
+                    IDC_COMPACTMENU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,
+                    51,205,11
+    CONTROL         "Close Calendar When It Looses Focus",IDC_CALENDARHIDE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,71,135,11
+END
+
+IDD_PAGEABOUT DIALOGEX 0, 0, 310, 200
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "About"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            0,IDC_ABOUTICON,23,6,20,20
+    LTEXT           "Tclock2 v1.2.0 - Taskbar Customizer",IDC_STATIC,52,13,
+                    133,11,0,WS_EX_TRANSPARENT
+    LTEXT           "Two_toNe 2003",IDC_STATIC,106,25,55,10,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "E-mail :",IDC_STATIC,24,41,30,11,0,WS_EX_TRANSPARENT
+    LTEXT           "2tone@inreach.com",IDC_MAILTO,59,41,80,11,SS_NOTIFY,
+                    WS_EX_TRANSPARENT
+    LTEXT           "WWW :",IDC_STATIC,24,56,30,11,0,WS_EX_TRANSPARENT
+    LTEXT           "http://home.inreach.com/2tone/tclock2/tclock2.htm",
+                    IDC_HOMEPAGE,59,56,174,11,SS_NOTIFY,WS_EX_TRANSPARENT
+    LTEXT           "Tclock2 is based off of the original TClock. Thanks to Kazubon for releasing the original app, as well as the source code. Special thanks to everyone at Virtual Plastic and The WinMod Forums for all the ideas and support. ",
+                    IDC_STATIC,24,75,201,38,0,WS_EX_TRANSPARENT
+    LTEXT           "Help URL",IDC_STATIC,23,122,159,11,WS_DISABLED
+    EDITTEXT        IDC_HELPURL,23,135,142,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "...",IDC_BROWSEHELP,171,135,12,13,WS_DISABLED
+    LTEXT           "Language Module",IDC_STATIC,23,158,159,11
+    EDITTEXT        IDC_LANGDLL,23,170,142,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSELANGDLL,171,170,12,13
+END
+
+IDD_SELECTICON DIALOG DISCARDABLE  0, 0, 187, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Icon"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_FNAMEICON,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,6,
+                    12,168,12
+    LISTBOX         IDC_LISTICON,6,32,174,34,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_MULTICOLUMN | 
+                    LBS_DISABLENOSCROLL | WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,32,74,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,83,74,45,14
+    PUSHBUTTON      "Browse",IDC_SANSHOICON,135,74,45,14
+END
+
+IDD_TESTSOUND DIALOG DISCARDABLE  0, 0, 183, 64
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "",1119,3,4,175,33
+    LTEXT           "Test:",IDC_LABTESTSOUND,6,47,20,8
+    PUSHBUTTON      "",IDC_TESTSOUND,27,44,13,14,BS_ICON
+END
+
+IDD_TIMER DIALOG DISCARDABLE  0, 0, 187, 140
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Timer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Name",IDC_STATIC,7,10,38,8
+    COMBOBOX        IDC_TIMERNAME,50,8,108,76,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "",IDC_TIMERDEL,162,8,13,14,BS_ICON
+    EDITTEXT        IDC_TIMERMINUTE,50,30,33,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_TIMERSPIN,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,133,31,23,12
+    LTEXT           "Minute",IDC_STATIC,88,33,22,11
+    RTEXT           "File",IDC_STATIC,7,56,38,8
+    EDITTEXT        IDC_TIMERFILE,50,53,108,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_TIMERSANSHO,162,53,13,14
+    RTEXT           "Test",IDC_TIMERLABTEST,7,77,38,8
+    PUSHBUTTON      "",IDC_TIMERTEST,50,74,13,14,BS_ICON
+    CONTROL         "Repeat",IDC_TIMERREPEAT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,83,95,39,10
+    CONTROL         "Blink",IDC_TIMERBLINK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,127,95,43,10
+    DEFPUSHBUTTON   "Start",IDOK,12,120,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,69,120,50,14
+    PUSHBUTTON      "Help",IDC_TIMERHELP,126,120,50,14
+END
+
+IDD_PAGESTARTMENU DIALOG DISCARDABLE  0, 0, 310, 200
+STYLE WS_CHILD | WS_CAPTION
+CAPTION "Start Menu"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Customize Start Menu",IDC_STARTMENU,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,10,120,10
+    LTEXT           "Bitmap",IDC_LABFILEMENU,19,28,25,10
+    EDITTEXT        IDC_FILEMENU,50,25,120,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_SANSHOMENU,175,25,15,15
+    LTEXT           "Color",IDC_LABCOLMENU,19,47,20,10
+    COMBOBOX        IDC_COLMENU,40,46,95,120,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "...",IDC_CHOOSECOLMENU,140,46,15,15
+    LTEXT           "Draw Style",IDC_LABMENUSTYLE,20,84,35,10
+    COMBOBOX        IDC_MENUSTYLEMENU,65,81,90,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Edge Scaling",IDC_MENUEDGESCALE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,21,105,60,10
+    LTEXT           "Edge Top",IDC_LABEDEGETOP,29,123,35,10
+    EDITTEXT        IDC_MENUEDGETOP,70,120,35,15,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_SPINMENUEDGETOP,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,165,95,9,15
+    LTEXT           "Edge Bottom",IDC_LABEDGEBOTTOM,115,123,45,10
+    EDITTEXT        IDC_MENUEDGEBOTTOM,165,120,35,15,ES_AUTOHSCROLL
+    CONTROL         "Spin3",IDC_SPINMENUEDGEBOTTOM,"msctls_updown32",
+                    UDS_WRAP | UDS_SETBUDDYINT | UDS_ALIGNRIGHT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,185,95,9,15
+    LTEXT           "Trasparency Of Start Menu",IDC_CAPMENUTRANS,21,176,90,
+                    10
+    EDITTEXT        IDC_MENUTRANS,112,173,35,15,ES_AUTOHSCROLL
+    CONTROL         "Spin4",IDC_SPINMENUTRANS,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,100,175,9,15
+    CONTROL         "Show Banner When Viewed in Small Icon Mode",
+                    IDC_BANNERSMALLICONS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,141,177,10
+    CONTROL         "Hide Banner When in Normal Icon Mode",
+                    IDC_NOBANNERLARGEICONS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,158,179,10
+    CONTROL         "Use Transparency",IDC_STARTMENUTRANS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,21,65,71,10
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,0,0
+ PRODUCTVERSION 1,2,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "Two_toNe\0"
+            VALUE "FileDescription", "Customize Taskbar Ver.1.2.0\0"
+            VALUE "FileVersion", "1, 2, 0, 0\0"
+            VALUE "InternalName", "Tclock2\0"
+            VALUE "LegalCopyright", "Copyright © 2003\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Tclock2.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Tclock2\0"
+            VALUE "ProductVersion", "1, 2, 0, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resrc1.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PAGESKIN, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 198
+    END
+
+    IDD_PAGESTARTMENU, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 190
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROPERTY            "Tclock2 Properties"
+    IDS_BTNFACE             "Button Face"
+    IDS_BTNSHADOW           "Button Shadow"
+    IDS_BTNLIGHT            "Button Highlight"
+    IDS_BTNTEXT             "Button Text"
+    IDS_ADDALARM            "( Add )"
+    IDS_MMFILE              "Multimedia  (*.wav, *.mid,...)"
+    IDS_ALLFILE             "All (*.*)"
+    IDS_PROGRAMFILE         "Program (*.exe)"
+    IDS_NONE                "(none)"
+    IDS_RECYCLE             "Recycle Bin"
+    IDS_OPENBY              "Open with..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_COPYTO              "Copy To..."
+    IDS_MOVETO              "Move To..."
+    IDS_LABPROGRAM          "Application"
+    IDS_LABFOLDER           "Folder"
+    IDS_LEFTBUTTON          "Left Button"
+    IDS_RIGHTBUTTONM        "Middle Button"
+    IDS_XBUTTON1            "Side Button 1"
+    IDS_XBUTTON2            "Side Button 2"
+    IDS_PROPDATE            "Date/Time Properties"
+    IDS_EXITWIN             "Shut Down Windows"
+    IDS_RUN                 "Run"
+    IDS_ALLMIN              "Minimize All Windows"
+    IDS_SYNCTIME            "Synchronize"
+    IDS_TIMER               "Timer"
+    IDS_MOUSECOPY           "Copy To Clipboard"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SCREENSAVER         "Screen Saver"
+    IDS_OPENFILE            "Open File"
+    IDS_FORMAT              "Format"
+    IDS_FILE                "File"
+    IDS_BMPFILE             "Bitmap (*.bmp)"
+    IDS_BMPICONFILE         "Bitmap, Icon (*.bmp, *.ico)"
+    IDS_EXEDLLFILE          "Program (*.exe, *.dll, *.icl)"
+    IDS_NOICON              "No icons in this file"
+    IDS_START               "Start"
+    IDS_SYNCNOW             "Adjust Now"
+    IDS_STARTUPLINK         "Create a shortcut in Startup folder.\nAre you sure?"
+    IDS_HELPURL             "http://homepage1.nifty.com/kazubon/tclock/help/en/"
+    IDS_LANGDLLFILE         "Tclock2 language module (lang*.tclock2)"
+    IDS_NOTFOUNDCLOCK       "Failed to customize clock"
+    IDS_STARTBTNNORM        "Normal"
+    IDS_STARTBTNFLAT        "Flat"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STARTBTNCOLOR       "Custom Color"
+    IDS_STARTBTNSKIN        "Skinned"
+    IDS_STARTMENUNONE       "None"
+    IDS_STARTMENUTILE       "Tile"
+    IDS_STARTMENUSTRETCH    "Stretch"
+    IDS_GRIPPERNORMAL       "Normal"
+    IDS_GRIPPERHIDDEN       "Hidden"
+    IDS_GRIPPERLOCKED       "Locked"
+    IDS_FILLCLOCK           "FillClock"
+    IDS_SKINCLOCK           "SkinClock"
+    IDS_FILLTRAY            "FillTray"
+    IDS_SKINTRAY            "SkinTray"
+    IDS_3DHILIGHT           "Button HiLight"
+    IDS_3DLIGHT             "Button Light"
+    IDS_3DSHADOW            "Button Shadow"
+    IDS_3DDKSHADOW          "Button Dark Shadow"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_3DFACE              "Button Face"
+    IDS_BUTTONTEXT          "Button Text"
+    IDS_TASKBAREDGENORMAL   "Normal"
+    IDS_TASKBAREDGEFLAT     "Flat"
+    IDS_TASKBAREDGESKINNED  "Skinned"
+    IDS_DESKTOPICONSIZESMALL "Small (16x16)"
+    IDS_DESKTOPICONSIZENORMAL "Normal (32x32)"
+    IDS_SHOWCALENDER        "Show Calender"
+    IDS_CLOCKROTATEFONTNONE "None"
+    IDS_CLOCKROTATEFONTLEFT "Left"
+    IDS_CLOCKROTATEFONTRIGHT "Right"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

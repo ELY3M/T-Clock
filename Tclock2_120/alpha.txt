@@ -1,0 +1,23 @@
+Tclock2 v1.2.0
+
+This text file will document all the items in Tclock2 that either don't work or don't work completely. 
+
+	
+Hidden Rebar Grippers:
+----------------------------
+Currently this only hides the grippers, they are still there just they're colors have been changed to match the rebar. As 		soon as I get it working correctly, you will be able to completely romove the grippers.
+
+	
+Start Button Skinning:
+-------------------------
+This works fine unless you either unload and reload Tclock2 several times(20+) or change the system colors alot(20+). A 	simple refresh fixes this for now, I am working on a Fix for this.
+
+	
+Clock Skinning:
+------------------
+Currently you are only able to stretch the skin, not a big deal will fix soon.
+	
+
+Calender:
+-----------
+Tclock2 has its own built-in calender. As of right now, it cannot be customized. This will change soon!
